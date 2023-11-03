@@ -3,6 +3,9 @@
 // const colors = require('colors')
 import express from 'express';
 import colors from 'colors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 //rest object: to use api
 const app = express();
@@ -15,7 +18,7 @@ app.get('/', (req,res) => {
 })
 
 //PORT
-const PORT = 8080
+const PORT = process.env.PORT || 8080;
 
 //run the app
 app.listen(PORT, ()=>{
