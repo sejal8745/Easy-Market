@@ -4,13 +4,13 @@ import { Outlet } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../Spinner";
 
-const PrivateRoutes = () => {
+const AdminRoute = () => {
   const [ok, setOk] = useState(false);
   const [auth, setAuth] = useAuth();
 
   useEffect(() => {
     const authCheck = async () => {
-      const res = await axios.get("/api/v1/auth/user-auth");
+      const res = await axios.get("/api/v1/auth/admin-auth");
 
       if (res.data.ok) {
         setOk(true);
@@ -24,7 +24,7 @@ const PrivateRoutes = () => {
   return ok ? <Outlet /> : <Spinner path="" />;
 };
 
-export default PrivateRoutes;
+export default AdminRoute;
 //   const res = await axios.get("/api/v1/auth/auth-user", {
 //     headers: {
 //       Authorization: auth?.token,

@@ -16,7 +16,9 @@ router.post("/forgot-password", forgotPasswordController);
 //text route
 router.get("/test", requireSignIn, isAdmin, testController);
 
-//protected route
+//protected user route
 router.get("/user-auth", requireSignIn, protectRouteController);
+//admin protected route
+router.get("/admin-auth", requireSignIn, isAdmin, protectRouteController);
 
 export default router;
