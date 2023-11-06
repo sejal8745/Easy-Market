@@ -36,7 +36,7 @@ const Register = () => {
   };
 
   return (
-    <Layout title="Register">
+    <Layout title="Register - EasyMarket">
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h4 className="title"> Register</h4>

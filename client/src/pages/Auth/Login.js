@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../components/layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/Authstyle.css";
 import { useAuth } from "../../context/Auth.js";
 
@@ -12,6 +12,7 @@ const Login = () => {
   const [auth, setAuth] = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const Login = () => {
           token: res.data.token,
         });
         localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate("/");
+        navigate(location.state || "/");
       } else {
         toast.error(res.data.message);
       }
@@ -38,7 +39,7 @@ const Login = () => {
     }
   };
   return (
-    <Layout title="Login">
+    <Layout title="Login - EasyMarket">
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <h4 className="title"> Login Here</h4>

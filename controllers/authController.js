@@ -117,3 +117,8 @@ export const testController = (req, res) => {
   //console.log("protect route");
   res.send("Protected route");
 };
+
+//private route
+export const protectRouteController = (req, res) => {
+  res.status(200).send({ ok: true });
+};
