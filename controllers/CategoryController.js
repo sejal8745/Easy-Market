@@ -18,7 +18,7 @@ export const CreateCategoryController = async (req, res) => {
       });
     }
 
-    const category = await new CategoryModel({
+    const category = await new categoryModel({
       name,
       slug: slugify(name),
     }).save();

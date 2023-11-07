@@ -30,7 +30,7 @@ router.put(
 router.get("/get-category", categoryController);
 
 //single category get
-router.get("/get-singleCategory/:slug", singleCategoryController);
+router.get("/get-category/:slug", singleCategoryController);
 
 //delete-cateory
 router.delete(
