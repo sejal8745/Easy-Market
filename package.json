@@ -14,6 +14,7 @@
   "author": "Sejal",
   "license": "ISC",
   "dependencies": {
+    "antd": "^5.11.0",
     "bcrypt": "^5.1.1",
     "colors": "^1.4.0",
     "concurrently": "^8.2.2",
