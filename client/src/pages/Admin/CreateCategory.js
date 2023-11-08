@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../../components/layout/Layout";
-import AdminMenu from "../../components/layout/AdminMenu";
+import React, { useEffect, useState } from "react";
+import Layout from "./../../components/layout/Layout.js";
+import AdminMenu from "./../../components/layout/AdminMenu.js";
 import toast from "react-hot-toast";
 import axios from "axios";
+import CategoryForm from "../../components/form/CategoriesFom.js";
 import { Modal } from "antd";
-import CategoriesFom from "../../components/form/CategoriesFom";
-
 const CreateCategory = () => {
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
-
-  //handle form
+  //handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -22,37 +20,37 @@ const CreateCategory = () => {
       });
       if (data?.success) {
         toast.success(`${name} is created`);
-        getCategory();
+        getAllCategory();
       } else {
         toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong in input form");
+      toast.error("somthing went wrong in input form");
     }
   };
 
-  const getCategory = async (req, res) => {
+  //get all cat
+  const getAllCategory = async () => {
     try {
       const { data } = await axios.get("/api/v1/category/get-category");
-
       if (data.success) {
-        setCategory(data.category);
+        setCategories(data.category);
       }
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong in getting categories");
+      toast.error("Something wwent wrong in getting catgeory");
     }
   };
 
   useEffect(() => {
-    getCategory();
+    getAllCategory();
   }, []);
 
+  //update category
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      //console.log(e);
       const { data } = await axios.put(
         `/api/v1/category/update-category/${selected._id}`,
         { name: updatedName }
@@ -62,33 +60,29 @@ const CreateCategory = () => {
         setSelected(null);
         setUpdatedName("");
         setVisible(false);
-        getCategory();
+        getAllCategory();
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("something went wrong in updating the category");
+      toast.error("Somtihing went wrong");
     }
   };
-
-  //delete caegory
-  const handleDelete = async (cid) => {
+  //delete category
+  const handleDelete = async (pId) => {
     try {
-      //console.log(e);
       const { data } = await axios.delete(
-        `/api/v1/category/delete-category/${cid}`
+        `/api/v1/category/delete-category/${pId}`
       );
       if (data.success) {
-        toast.success("category is deleted ");
+        toast.success(`category is deleted`);
 
-        getCategory();
+        getAllCategory();
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
-      toast.error("something went wrong in updating the category");
+      toast.error("Somtihing went wrong");
     }
   };
 
@@ -99,10 +93,10 @@ const CreateCategory = () => {
           <div className="col-md-3">
             <AdminMenu />
           </div>
-          <div classname="col-md-9">
-            <h3>Manage Category</h3>
+          <div className="col-md-9">
+            <h1>Manage Category</h1>
             <div className="p-3 w-50">
-              <CategoriesFom
+              <CategoryForm
                 handleSubmit={handleSubmit}
                 value={name}
                 setValue={setName}
@@ -112,12 +106,12 @@ const CreateCategory = () => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th scope="col">name</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {category?.map((c) => (
+                  {categories?.map((c) => (
                     <>
                       <tr>
                         <td key={c._id}>{c.name}</td>
@@ -152,7 +146,7 @@ const CreateCategory = () => {
               footer={null}
               visible={visible}
             >
-              <CategoriesFom
+              <CategoryForm
                 value={updatedName}
                 setValue={setUpdatedName}
                 handleSubmit={handleUpdate}
