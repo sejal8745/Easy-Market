@@ -7,6 +7,9 @@ import {
   getSingleProductController,
   deleteProductController,
   updateProductController,
+  productFiltersController,
+  productCountController,
+  productListController,
 } from "../controllers/ProductController.js";
 import ExpressFormidable from "express-formidable";
 
@@ -41,4 +44,12 @@ router.put(
   ExpressFormidable(),
   updateProductController
 );
+
+//filter
+router.post("/product-filters", productFiltersController);
+//product count
+router.get("/product-count", productCountController);
+
+//product per-page
+router.get("/product-list/:page", productListController);
 export default router;

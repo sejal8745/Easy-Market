@@ -39,28 +39,26 @@ const CreateProduct = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      const productData = await new FormData();
+      const productData = new FormData();
       productData.append("name", name);
       productData.append("description", description);
       productData.append("price", price);
       productData.append("quantity", quantity);
-      productData.append("category", category);
       productData.append("photo", photo);
-
-      const { data } = await axios.post(
+      productData.append("category", category);
+      const { data } = axios.post(
         "/api/v1/product/create-product",
         productData
       );
-
       if (data?.success) {
-        toast.success("product created successfully");
-        navigate("/dashboad/admin/product");
-      } else {
         toast.error(data?.message);
+      } else {
+        toast.success("Product Created Successfully");
+        navigate("/dashboard/admin/products");
       }
     } catch (error) {
       console.log(error);
-      toast.error("something went wrong in creating the product");
+      toast.error("something went wrong");
     }
   };
   return (
