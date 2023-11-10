@@ -80,12 +80,12 @@ const ProductDetails = () => {
                 <h5 className="card-title">{p.name}</h5>
                 <p className="card-text">{p.description.substring(0, 30)}...</p>
                 <p className="card-text"> Rs {p.price}</p>
-                {/* <button
+                <button
                   class="btn btn-primary ms-1"
                   onClick={() => navigate(`/product/${p.slug}`)}
                 >
                   More Details
-                </button> */}
+                </button>
                 <button class="btn btn-secondary ms-1">ADD TO CART</button>
               </div>
             </div>

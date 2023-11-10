@@ -12,7 +12,9 @@ import {
   productListController,
   searchProductController,
   relatedProductController,
+  productCategoryController,
 } from "../controllers/ProductController.js";
+
 import ExpressFormidable from "express-formidable";
 
 const router = express.Router();
@@ -60,4 +62,8 @@ router.get("/search/:keyword", searchProductController);
 
 //similar product
 router.get("/related-product/:pid/:cid", relatedProductController);
+
+//category product
+router.get("/product-category/:slug", productCategoryController);
+
 export default router;
