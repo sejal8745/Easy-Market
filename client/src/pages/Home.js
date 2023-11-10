@@ -5,8 +5,10 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices.js";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -143,7 +145,7 @@ const Home = () => {
           </div>
         </div>
         <div className="col-md-9">
-          {JSON.stringify(radio, null, 4)}
+          {/* {JSON.stringify(radio, null, 4)} */}
           <h1 className="text-center">All products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
@@ -159,7 +161,12 @@ const Home = () => {
                     {p.description.substring(0, 30)}...
                   </p>
                   <p className="card-text"> Rs {p.price}</p>
-                  <button class="btn btn-primary ms-1">More Details</button>
+                  <button
+                    class="btn btn-primary ms-1"
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                  >
+                    More Details
+                  </button>
                   <button class="btn btn-secondary ms-1">ADD TO CART</button>
                 </div>
               </div>
