@@ -6,6 +6,7 @@ import {
   forgotPasswordController,
   protectRouteController,
   updateProfileController,
+  getOrdersController,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
 const router = express.Router();
@@ -24,5 +25,8 @@ router.get("/admin-auth", requireSignIn, isAdmin, protectRouteController);
 
 //update-profile
 router.put("/profile", requireSignIn, updateProfileController);
+
+//orders
+router.get("/orders", requireSignIn, getOrdersController);
 
 export default router;

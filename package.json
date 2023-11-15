@@ -16,6 +16,8 @@
   "dependencies": {
     "antd": "^5.11.0",
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "braintree": "^3.19.0",
     "colors": "^1.4.0",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
