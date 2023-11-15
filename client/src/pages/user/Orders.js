@@ -37,22 +37,22 @@ const Orders = () => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <td scope="col">#</td>
-                        <td scope="col">Status</td>
-                        <td scope="col">Buyers</td>
-                        <td scope="col">Orders</td>
-                        <td scope="col">Payment</td>
-                        <td scope="col">Quantity</td>
+                        <th scope="col">#</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Buyers</th>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Payment</th>
+                        <th scope="col">Quantity</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <th>{i + 1}</th>
-                        <th>{o?.status}</th>
-                        <th>{o?.buyers?.name}</th>
-                        <th>{moment(o?.createdAt).fromNow()}</th>
-                        <th>{o?.payment.success ? "Success" : "Failed"}</th>
-                        <th>{o?.products?.length}</th>
+                        <td>{i + 1}</td>
+                        <td>{o?.status}</td>
+                        <td>{o?.buyers?.name}</td>
+                        <td>{moment(o?.createdAt).fromNow()}</td>
+                        <td>{o?.payment.success ? "Success" : "Failed"}</td>
+                        <td>{o?.products?.length}</td>
                       </tr>
                     </tbody>
                   </table>

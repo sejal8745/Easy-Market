@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import "../styles/ProductDetails.css";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -41,52 +42,80 @@ const ProductDetails = () => {
 
   return (
     <Layout>
-      <h1>Product Details</h1>
-      <div className="row container mt-2">
+      <div className="row container product-details">
         <div className="col-md-6">
           <img
             src={`/api/v1/product/product-photo/${product._id}`}
             className="card-img-top"
             alt={product.name}
-            height="400px"
-            width="350px"
+            height="300"
+            width={"350px"}
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 product-details-info">
           <h1 className="text-center">Product Details</h1>
-          <h6>Name: {product.name} </h6>
-          <h6>Description: {product.description} </h6>
-          <h6>Price: {product.price} </h6>
-          <h6>Category: {product?.category?.name} </h6>
+          <hr />
+          <h6>Name : {product.name}</h6>
+          <h6>Description : {product.description}</h6>
+          <h6>
+            Price :
+            {product?.price?.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}
+          </h6>
+          <h6>Category : {product?.category?.name}</h6>
           <button class="btn btn-secondary ms-1">ADD TO CART</button>
         </div>
       </div>
       <hr />
-      <div className="row container">
-        <h1>Similar product</h1>
+      <div className="row container similar-products">
+        <h1>Similar Products</h1>
         {relatedProduct.length < 1 && (
           <p className="text-center">No similar products found</p>
         )}
         {/* {JSON.stringify(relatedProduct, null, 4)} */}
         <div className="d-flex flex-wrap">
           {relatedProduct?.map((p) => (
-            <div className="card m-2" style={{ width: "18rem" }}>
+            <div className="card m-2" key={p._id}>
               <img
                 src={`/api/v1/product/product-photo/${p._id}`}
                 className="card-img-top"
                 alt={p.name}
               />
               <div className="card-body">
-                <h5 className="card-title">{p.name}</h5>
-                <p className="card-text">{p.description.substring(0, 30)}...</p>
-                <p className="card-text"> Rs {p.price}</p>
-                <button
-                  class="btn btn-primary ms-1"
-                  onClick={() => navigate(`/product/${p.slug}`)}
-                >
-                  More Details
-                </button>
-                <button class="btn btn-secondary ms-1">ADD TO CART</button>
+                <div className="card-name-price">
+                  <h5 className="card-title">{p.name}</h5>
+                  <h5 className="card-title card-price">
+                    {p.price.toLocaleString("en-IN", {
+                      style: "currency",
+                      currency: "IND",
+                    })}
+                  </h5>
+                </div>
+                <p className="card-text">{p.description.substring(0, 60)}...</p>
+                {/* <p className="card-text"> Rs {p.price}</p> */}
+                <div className="card-name-price">
+                  <button
+                    class="btn btn-info ms-1"
+                    onClick={() => navigate(`/product/${p.slug}`)}
+                  >
+                    More Details
+                  </button>
+                  {/* <button
+                    class="btn btn-secondary ms-1"
+                    onClick={() => {
+                      setCart([...cart, p]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, p])
+                      );
+                      toast.success("Added to cart");
+                    }}
+                  >
+                    ADD TO CART
+                  </button> */}
+                </div>
               </div>
             </div>
           ))}

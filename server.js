@@ -19,8 +19,8 @@ const app = express();
 
 //middleware
 app.use(cors());
-app.use(bodyParser.json({ limit: "10mb" }));
-app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
+// app.use(bodyParser.json({ limit: "10mb" }));
+// app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 // Express 3.0
 app.use(express.json({ limit: "10mb" }));
@@ -42,7 +42,7 @@ app.get("/", (req, res) => {
 });
 
 //PORT
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9000;
 
 //run the app
 app.listen(PORT, () => {
