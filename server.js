@@ -10,11 +10,16 @@ import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import bodyParser from "body-parser";
 import path from "path";
+import {fileURLToPath} from "url"
 
 dotenv.config();
 
 //connect db
 connectDB();
+
+//es-module
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 //rest object: to use api
 const app = express();
 
