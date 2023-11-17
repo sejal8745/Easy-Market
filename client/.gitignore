@@ -8,9 +8,9 @@
 # testing
 /coverage
 
-# production
-# Ignore build folder
-/build
+# # production
+# # Ignore build folder
+# /build
 
 # misc
 .DS_Store
