@@ -9,6 +9,7 @@
 /coverage
 
 # production
+# Ignore build folder
 /build
 
 # misc
