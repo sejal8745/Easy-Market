@@ -10,7 +10,7 @@ import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
 import bodyParser from "body-parser";
 import path from "path";
-import {fileURLToPath} from "url"
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -18,13 +18,19 @@ dotenv.config();
 connectDB();
 
 //es-module
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
 //rest object: to use api
 const app = express();
 
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://easy-market-delta.vercel.app/"],
+    methods: ["POST", "GET"],
+    credential: true,
+  })
+);
 // app.use(bodyParser.json({ limit: "10mb" }));
 // app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
@@ -34,7 +40,7 @@ app.use(express.urlencoded({ limit: "10mb" }));
 
 //app.use(express.json());
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "./client/build")));
+// app.use(express.static(path.join(__dirname, "./client/build")));
 
 //routes
 app.use("/api/v1/auth", authRoute);
