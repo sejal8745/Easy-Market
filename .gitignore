@@ -1,0 +1,11 @@
+# Ignore logs and OS junk
+.DS_Store
+logs/
+*.log
+
+# Ignore Vercel config if not pushing it
+.vercel/
+
+# Ignore env files
+.env
+.env.*.local

@@ -8,7 +8,6 @@ import connectDB from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import productRoutes from "./routes/productRoute.js";
-import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -26,13 +25,16 @@ const app = express();
 //middleware
 app.use(
   cors({
-    origin: ["https://easy-market-delta.vercel.app/"],
-    methods: ["POST", "GET"],
-    credential: true,
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:9000",
+      "http://localhost:9001",
+      "https://easy-market-delta.vercel.app",
+    ],
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
-// app.use(bodyParser.json({ limit: "10mb" }));
-// app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 
 // Express 3.0
 app.use(express.json({ limit: "10mb" }));
