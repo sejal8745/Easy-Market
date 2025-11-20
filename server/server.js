@@ -29,7 +29,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:9000",
       "http://localhost:9001",
-      "https://easy-market-delta.vercel.app",
+      "https://your-app.vercel.app",
     ],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
