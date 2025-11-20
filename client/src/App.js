@@ -24,6 +24,14 @@ import Categories from "./pages/Categories.js";
 import CategoryProduct from "./pages/CategoryProduct.js";
 import Cartpage from "./pages/Cartpage.js";
 import AdminOrders from "./pages/Admin/AdminOrders.js";
+
+import axios from "axios";
+
+// Set default base URL globally
+axios.defaults.baseURL =
+  process.env.REACT_APP_API_BASE || "http://localhost:9000";
+axios.defaults.withCredentials = true;
+
 function App() {
   return (
     <>
