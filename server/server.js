@@ -29,7 +29,7 @@ app.use(
       "http://localhost:3000",
       "http://localhost:9000",
       "http://localhost:9001",
-      "https://easy-market-gules.vercel.app/",
+      "https://easy-market-gules.vercel.app",
     ],
     methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
