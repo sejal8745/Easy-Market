@@ -13,7 +13,7 @@ import "../styles/HomePage.css";
 const Home = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useCart([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState();
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
@@ -163,7 +163,7 @@ const Home = () => {
             {products?.map((p) => (
               <div className="card m-2" style={{ width: "18rem" }}>
                 <img
-                  src={`/api/v1/product/product-photo/${p._id}`}
+                  src={`${process.env.REACT_APP_API_BASE}api/v1/product/product-photo/${p._id}`}
                   className="card-img-top"
                   alt={p.name}
                 />
