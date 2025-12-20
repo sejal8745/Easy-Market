@@ -2,6 +2,7 @@ import React from "react";
 import { useSearch } from "../../context/Search";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const SearchInput = () => {
   const [value, setValue] = useSearch();
@@ -38,7 +39,7 @@ const SearchInput = () => {
           }}
         />
         <button className="btn btn-outline-success" type="submit">
-          Search
+          <AiOutlineSearch />
         </button>
       </form>
     </div>

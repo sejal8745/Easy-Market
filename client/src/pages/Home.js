@@ -24,27 +24,96 @@ const FilterSection = ({
   Prices,
 }) => {
   return (
-    <div className="filter-sidebar">
-      <div className="filter-header">
-        <h3> Filters</h3>
+    <div
+      style={{
+        background: "#FFFFFF",
+        borderRadius: "16px",
+        padding: "28px",
+        boxShadow: "0 2px 16px rgba(27, 33, 26, 0.08)",
+        position: "sticky",
+        top: "20px",
+        border: "1px solid #EBD5AB",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "28px",
+          paddingBottom: "20px",
+          borderBottom: "2px solid #EBD5AB",
+        }}
+      >
+        <h3
+          style={{
+            margin: 0,
+            fontSize: "1.5rem",
+            fontWeight: "700",
+            color: "#1B211A",
+            fontFamily: '"Playfair Display", Georgia, serif',
+          }}
+        >
+          🎯 Filters
+        </h3>
         <button
-          className="btn-reset"
           onClick={() => window.location.reload()}
           title="Reset all filters"
+          style={{
+            background: "#628141",
+            color: "white",
+            border: "none",
+            padding: "10px 18px",
+            borderRadius: "10px",
+            fontSize: "0.875rem",
+            fontWeight: "600",
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            fontFamily: '"Inter", sans-serif',
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = "#8BAE66";
+            e.target.style.transform = "translateY(-2px)";
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = "#628141";
+            e.target.style.transform = "translateY(0)";
+          }}
         >
           Reset All
         </button>
       </div>
 
-      <div className="filter-group">
-        <h4 className="filter-title"> Category</h4>
-        <div className="filter-options">
+      <div style={{ marginBottom: "32px" }}>
+        <h4
+          style={{
+            fontSize: "1.1rem",
+            fontWeight: "600",
+            color: "#1B211A",
+            marginBottom: "16px",
+            fontFamily: '"Inter", sans-serif',
+          }}
+        >
+          📁 Category
+        </h4>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+          }}
+        >
           {categories?.map((c) => (
             <Checkbox
               key={c._id}
               onChange={(e) => handleFilters(e.target.checked, c._id)}
               checked={checked.includes(c._id)}
-              className="custom-checkbox"
+              style={{
+                padding: "10px 14px",
+                borderRadius: "10px",
+                transition: "all 0.2s",
+                fontFamily: '"Inter", sans-serif',
+              }}
             >
               {c.name}
             </Checkbox>
@@ -52,16 +121,36 @@ const FilterSection = ({
         </div>
       </div>
 
-      <div className="filter-group">
-        <h4 className="filter-title"> Price Range</h4>
-        <div className="filter-options">
-          <Radio.Group
-            onChange={(e) => setRadio(e.target.value)}
-            value={radio}
-            className="custom-radio-group"
-          >
+      <div>
+        <h4
+          style={{
+            fontSize: "1.1rem",
+            fontWeight: "600",
+            color: "#1B211A",
+            marginBottom: "16px",
+            fontFamily: '"Inter", sans-serif',
+          }}
+        >
+          💰 Price Range
+        </h4>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+          }}
+        >
+          <Radio.Group onChange={(e) => setRadio(e.target.value)} value={radio}>
             {Prices?.map((p) => (
-              <div key={p._id} className="radio-item">
+              <div
+                key={p._id}
+                style={{
+                  padding: "8px 14px",
+                  borderRadius: "10px",
+                  transition: "all 0.2s",
+                  fontFamily: '"Inter", sans-serif',
+                }}
+              >
                 <Radio value={p.array}>{p.name}</Radio>
               </div>
             ))}
@@ -69,122 +158,13 @@ const FilterSection = ({
         </div>
       </div>
 
-      <style jsx>{`
-        .filter-sidebar {
-          background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-          border-radius: 16px;
-          padding: 24px;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-          position: sticky;
-          top: 20px;
-          border: 1px solid #e8e8e8;
-        }
-
-        .filter-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 24px;
-          padding-bottom: 16px;
-          border-bottom: 2px solid #f0f0f0;
-        }
-
-        .filter-header h3 {
-          margin: 0;
-          font-size: 1.4rem;
-          font-weight: 700;
-          color: #1a1a1a;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .btn-reset {
-          background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
-          color: white;
-          border: none;
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 0.85rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 2px 8px rgba(255, 77, 79, 0.3);
-        }
-
-        .btn-reset:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(255, 77, 79, 0.4);
-        }
-
-        .btn-reset:active {
-          transform: translateY(0);
-        }
-
-        .filter-group {
-          margin-bottom: 28px;
-        }
-
-        .filter-group:last-child {
-          margin-bottom: 0;
-        }
-
-        .filter-title {
-          font-size: 1.05rem;
-          font-weight: 600;
-          color: #333;
-          margin-bottom: 14px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-
-        .filter-options {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .custom-checkbox {
-          padding: 8px 12px;
-          border-radius: 8px;
-          transition: all 0.2s;
-        }
-
-        .custom-checkbox:hover {
-          background: #f5f5f5;
-        }
-
-        .radio-item {
-          padding: 6px 12px;
-          border-radius: 8px;
-          transition: all 0.2s;
-        }
-
-        .radio-item:hover {
-          background: #f5f5f5;
-        }
-
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+        
         @media (max-width: 768px) {
-          .filter-sidebar {
-            position: static;
+          div[style*="position: sticky"] {
+            position: static !important;
             margin-bottom: 20px;
-            padding: 20px;
-          }
-
-          .filter-header {
-            flex-direction: column;
-            gap: 12px;
-            align-items: stretch;
-          }
-
-          .btn-reset {
-            width: 100%;
-            padding: 10px 16px;
-          }
-
-          .filter-header h3 {
-            font-size: 1.2rem;
           }
         }
       `}</style>
@@ -195,6 +175,7 @@ const FilterSection = ({
 // ============== ProductCard Component ==============
 const ProductCard = ({ product, navigate, cart, setCart }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const addToCart = () => {
     setCart([...cart, product]);
@@ -203,10 +184,43 @@ const ProductCard = ({ product, navigate, cart, setCart }) => {
   };
 
   return (
-    <div className="product-card">
-      <div className="product-image-wrapper">
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        background: "#FFFFFF",
+        borderRadius: "16px",
+        overflow: "hidden",
+        boxShadow: isHovered
+          ? "0 12px 32px rgba(27, 33, 26, 0.15)"
+          : "0 2px 12px rgba(27, 33, 26, 0.08)",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        border: `1px solid ${isHovered ? "#628141" : "#EBD5AB"}`,
+        transform: isHovered ? "translateY(-8px)" : "translateY(0)",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "260px",
+          overflow: "hidden",
+          background: "linear-gradient(135deg, #EBD5AB 0%, #F5E9D3 100%)",
+          position: "relative",
+        }}
+      >
         {!imageLoaded && (
-          <div className="image-skeleton">
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <Spin />
           </div>
         )}
@@ -214,37 +228,135 @@ const ProductCard = ({ product, navigate, cart, setCart }) => {
           src={`${process.env.REACT_APP_API_BASE}api/v1/product/product-photo/${product._id}`}
           alt={product.name}
           onLoad={() => setImageLoaded(true)}
-          style={{ display: imageLoaded ? "block" : "none" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: "transform 0.5s ease",
+            transform: isHovered ? "scale(1.08)" : "scale(1)",
+            display: imageLoaded ? "block" : "none",
+          }}
         />
-        <div className="product-overlay">
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(27, 33, 26, 0.7)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            opacity: isHovered ? 1 : 0,
+            transition: "opacity 0.3s ease",
+          }}
+        >
           <button
-            className="overlay-btn btn-view"
             onClick={() => navigate(`/product/${product.slug}`)}
             title="View Details"
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "50%",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              color: "white",
+              background: "#628141",
+            }}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
           >
-            <AiOutlineEye size={20} />
+            <AiOutlineEye size={22} />
           </button>
           <button
-            className="overlay-btn btn-add"
             onClick={addToCart}
             title="Add to Cart"
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "50%",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              color: "white",
+              background: "#8BAE66",
+            }}
+            onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
+            onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
           >
-            <AiOutlineShoppingCart size={20} />
+            <AiOutlineShoppingCart size={22} />
           </button>
         </div>
       </div>
 
-      <div className="product-info">
-        <h5 className="product-name" title={product.name}>
+      <div
+        style={{
+          padding: "20px",
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          fontFamily: '"Inter", sans-serif',
+        }}
+      >
+        <h5
+          style={{
+            fontSize: "1.1rem",
+            fontWeight: "600",
+            color: "#1B211A",
+            margin: "0 0 12px 0",
+            lineHeight: 1.4,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            minHeight: "2.8em",
+            fontFamily: '"Playfair Display", Georgia, serif',
+          }}
+        >
           {product.name}
         </h5>
-        <p className="product-desc">
+        <p
+          style={{
+            fontSize: "0.9rem",
+            color: "#666",
+            marginBottom: "16px",
+            flex: 1,
+            lineHeight: 1.5,
+          }}
+        >
           {product.description.substring(0, 65)}...
         </p>
 
-        <div className="product-footer">
-          <div className="price-wrapper">
-            <span className="product-price">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "1.6rem",
+                fontWeight: "700",
+                color: "#628141",
+              }}
+            >
               {product.price.toLocaleString("en-IN", {
                 style: "currency",
                 currency: "INR",
@@ -252,219 +364,75 @@ const ProductCard = ({ product, navigate, cart, setCart }) => {
             </span>
           </div>
 
-          <div className="product-actions">
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr",
+              gap: "8px",
+            }}
+          >
             <button
-              className="btn-details"
               onClick={() => navigate(`/product/${product.slug}`)}
+              style={{
+                padding: "12px 18px",
+                border: "2px solid #1B211A",
+                borderRadius: "10px",
+                fontSize: "0.9rem",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                background: "transparent",
+                color: "#1B211A",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = "#1B211A";
+                e.target.style.color = "white";
+                e.target.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = "transparent";
+                e.target.style.color = "#1B211A";
+                e.target.style.transform = "translateY(0)";
+              }}
             >
               View Details
             </button>
-            <button className="btn-cart" onClick={addToCart}>
+            <button
+              onClick={addToCart}
+              style={{
+                padding: "12px 18px",
+                border: "none",
+                borderRadius: "10px",
+                fontSize: "0.9rem",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                background: "#628141",
+                color: "white",
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = "#8BAE66";
+                e.target.style.transform = "translateY(-2px)";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = "#628141";
+                e.target.style.transform = "translateY(0)";
+              }}
+            >
               <AiOutlineShoppingCart size={16} />
               Add to Cart
             </button>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .product-card {
-          background: #fff;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          border: 1px solid #f0f0f0;
-        }
-
-        .product-card:hover {
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
-          transform: translateY(-8px);
-          border-color: #1890ff;
-        }
-
-        .product-image-wrapper {
-          width: 100%;
-          height: 260px;
-          overflow: hidden;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          position: relative;
-        }
-
-        .image-skeleton {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .product-image-wrapper img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image-wrapper img {
-          transform: scale(1.1);
-        }
-
-        .product-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.6);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .product-card:hover .product-overlay {
-          opacity: 1;
-        }
-
-        .overlay-btn {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          color: white;
-        }
-
-        .btn-view {
-          background: #1890ff;
-        }
-
-        .btn-add {
-          background: #52c41a;
-        }
-
-        .overlay-btn:hover {
-          transform: scale(1.15);
-        }
-
-        .product-info {
-          padding: 18px;
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-        }
-
-        .product-name {
-          font-size: 1.1rem;
-          font-weight: 600;
-          color: #1a1a1a;
-          margin: 0 0 10px 0;
-          line-height: 1.4;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-          min-height: 2.8em;
-        }
-
-        .product-desc {
-          font-size: 0.9rem;
-          color: #666;
-          margin-bottom: 14px;
-          flex: 1;
-          line-height: 1.5;
-        }
-
-        .product-footer {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-        }
-
-        .price-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .product-price {
-          font-size: 1.5rem;
-          font-weight: 700;
-          background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .product-actions {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 8px;
-        }
-
-        .btn-details,
-        .btn-cart {
-          padding: 10px 16px;
-          border: none;
-          border-radius: 8px;
-          font-size: 0.9rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
-        }
-
-        .btn-details {
-          background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-          color: #333;
-          border: 1px solid #d9d9d9;
-        }
-
-        .btn-details:hover {
-          background: linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-cart {
-          background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
-          color: white;
-          box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
-        }
-
-        .btn-cart:hover {
-          background: linear-gradient(135deg, #40a9ff 0%, #69c0ff 100%);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
-        }
-
-        @media (max-width: 768px) {
-          .product-image-wrapper {
-            height: 200px;
-          }
-
-          .product-name {
-            font-size: 1rem;
-          }
-
-          .product-price {
-            font-size: 1.3rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };
@@ -581,15 +549,49 @@ const Home = () => {
 
   return (
     <Layout title="Shop Now - EasyMarket">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+      `}</style>
+
       {/* Banner Image */}
-      <div className="banner-container">
-        <img src="/images/banner.png" className="banner-img" alt="banner" />
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+          maxHeight: "420px",
+          marginBottom: "40px",
+          borderRadius: "0 0 24px 24px",
+          boxShadow: "0 4px 20px rgba(27, 33, 26, 0.1)",
+        }}
+      >
+        <img
+          src="/images/banner.png"
+          style={{
+            width: "100%",
+            height: "auto",
+            objectFit: "cover",
+          }}
+          alt="banner"
+        />
       </div>
 
-      <div className="home-container">
-        <div className="home-layout">
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          padding: "0 20px 60px",
+        }}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "300px 1fr",
+            gap: "32px",
+            alignItems: "start",
+          }}
+        >
           {/* Filter Section */}
-          <div className="filter-column">
+          <div>
             <FilterSection
               categories={categories}
               checked={checked}
@@ -601,33 +603,122 @@ const Home = () => {
           </div>
 
           {/* Products Section */}
-          <div className="products-column">
-            <div className="products-header">
+          <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "32px",
+                paddingBottom: "24px",
+                borderBottom: "2px solid #EBD5AB",
+              }}
+            >
               <div>
-                <h1>All Products</h1>
-                <p className="products-subtitle">
+                <h1
+                  style={{
+                    margin: "0 0 8px 0",
+                    fontSize: "2.2rem",
+                    fontWeight: "700",
+                    color: "#1B211A",
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                  }}
+                >
+                  ✨ All Products
+                </h1>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "#666",
+                    fontSize: "1rem",
+                    fontFamily: '"Inter", sans-serif',
+                  }}
+                >
                   Discover amazing products at great prices
                 </p>
               </div>
-              <div className="product-count-badge">
+              <div
+                style={{
+                  background:
+                    "linear-gradient(135deg, #628141 0%, #8BAE66 100%)",
+                  color: "white",
+                  padding: "12px 24px",
+                  borderRadius: "20px",
+                  fontWeight: "600",
+                  fontSize: "0.95rem",
+                  boxShadow: "0 4px 12px rgba(98, 129, 65, 0.3)",
+                  fontFamily: '"Inter", sans-serif',
+                }}
+              >
                 {products?.length} {products?.length === 1 ? "item" : "items"}
               </div>
             </div>
 
             {filterLoading ? (
-              <div className="loading-state">
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "80px 20px",
+                  background:
+                    "linear-gradient(135deg, #EBD5AB 0%, #F5E9D3 100%)",
+                  borderRadius: "16px",
+                }}
+              >
                 <Spin size="large" />
-                <p>Filtering products...</p>
+                <p
+                  style={{
+                    marginTop: "20px",
+                    color: "#1B211A",
+                    fontSize: "1.05rem",
+                    fontWeight: "500",
+                    fontFamily: '"Inter", sans-serif',
+                  }}
+                >
+                  Filtering products...
+                </p>
               </div>
             ) : products?.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-icon">📦</div>
-                <h3>No products found</h3>
-                <p>Try adjusting your filters</p>
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "80px 20px",
+                  background:
+                    "linear-gradient(135deg, #EBD5AB 0%, #F5E9D3 100%)",
+                  borderRadius: "16px",
+                }}
+              >
+                <div style={{ fontSize: "4rem", marginBottom: "20px" }}>📦</div>
+                <h3
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "#1B211A",
+                    marginBottom: "10px",
+                    fontFamily: '"Playfair Display", Georgia, serif',
+                  }}
+                >
+                  No products found
+                </h3>
+                <p
+                  style={{
+                    color: "#666",
+                    fontSize: "1rem",
+                    fontFamily: '"Inter", sans-serif',
+                  }}
+                >
+                  Try adjusting your filters
+                </p>
               </div>
             ) : (
               <>
-                <div className="products-grid">
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                      "repeat(auto-fill, minmax(280px, 1fr))",
+                    gap: "24px",
+                    marginBottom: "40px",
+                  }}
+                >
                   {products?.map((p) => (
                     <ProductCard
                       key={p._id}
@@ -640,11 +731,49 @@ const Home = () => {
                 </div>
 
                 {products?.length < total && (
-                  <div className="load-more-section">
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: "40px",
+                      paddingTop: "40px",
+                      borderTop: "2px solid #EBD5AB",
+                    }}
+                  >
                     <button
-                      className="btn-load-more"
                       onClick={() => setPage(page + 1)}
                       disabled={loading}
+                      style={{
+                        background: loading
+                          ? "#ccc"
+                          : "linear-gradient(135deg, #628141 0%, #8BAE66 100%)",
+                        color: "white",
+                        border: "none",
+                        padding: "16px 48px",
+                        borderRadius: "12px",
+                        fontSize: "1rem",
+                        fontWeight: "600",
+                        cursor: loading ? "not-allowed" : "pointer",
+                        transition: "all 0.3s ease",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        boxShadow: "0 4px 12px rgba(98, 129, 65, 0.3)",
+                        fontFamily: '"Inter", sans-serif',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!loading) {
+                          e.target.style.transform = "translateY(-3px)";
+                          e.target.style.boxShadow =
+                            "0 6px 20px rgba(98, 129, 65, 0.4)";
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!loading) {
+                          e.target.style.transform = "translateY(0)";
+                          e.target.style.boxShadow =
+                            "0 4px 12px rgba(98, 129, 65, 0.3)";
+                        }
+                      }}
                     >
                       {loading ? (
                         <>
@@ -664,210 +793,49 @@ const Home = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .banner-container {
-          width: 100%;
-          overflow: hidden;
-          max-height: 400px;
-          margin-bottom: 30px;
-        }
-
-        .banner-img {
-          width: 100%;
-          height: auto;
-          object-fit: cover;
-        }
-
-        .home-container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 30px 20px 60px;
-        }
-
-        .home-layout {
-          display: grid;
-          grid-template-columns: 300px 1fr;
-          gap: 30px;
-          align-items: start;
-        }
-
-        .products-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 30px;
-          padding-bottom: 20px;
-          border-bottom: 2px solid #f0f0f0;
-        }
-
-        .products-header h1 {
-          margin: 0 0 8px 0;
-          font-size: 2rem;
-          font-weight: 700;
-          color: #1a1a1a;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-
-        .products-subtitle {
-          margin: 0;
-          color: #666;
-          font-size: 0.95rem;
-        }
-
-        .product-count-badge {
-          background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
-          color: white;
-          padding: 10px 20px;
-          border-radius: 20px;
-          font-weight: 600;
-          font-size: 0.9rem;
-          box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
-        }
-
-        .products-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 24px;
-          margin-bottom: 40px;
-        }
-
-        .loading-state {
-          text-align: center;
-          padding: 80px 20px;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          border-radius: 16px;
-        }
-
-        .loading-state p {
-          margin-top: 20px;
-          color: #666;
-          font-size: 1.05rem;
-          font-weight: 500;
-        }
-
-        .empty-state {
-          text-align: center;
-          padding: 80px 20px;
-          background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-          border-radius: 16px;
-        }
-
-        .empty-icon {
-          font-size: 4rem;
-          margin-bottom: 20px;
-        }
-
-        .empty-state h3 {
-          font-size: 1.5rem;
-          color: #333;
-          margin-bottom: 10px;
-        }
-
-        .empty-state p {
-          color: #666;
-          font-size: 1rem;
-        }
-
-        .load-more-section {
-          text-align: center;
-          margin-top: 40px;
-          padding-top: 40px;
-          border-top: 2px solid #f0f0f0;
-        }
-
-        .btn-load-more {
-          background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
-          color: white;
-          border: none;
-          padding: 14px 40px;
-          border-radius: 12px;
-          font-size: 1rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
-        }
-
-        .btn-load-more:hover:not(:disabled) {
-          background: linear-gradient(135deg, #40a9ff 0%, #69c0ff 100%);
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
-        }
-
-        .btn-load-more:active:not(:disabled) {
-          transform: translateY(-1px);
-        }
-
-        .btn-load-more:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-
+      {/* Responsive Styles */}
+      <style>{`
         @media (max-width: 1024px) {
-          .home-layout {
-            grid-template-columns: 260px 1fr;
-            gap: 24px;
+          div[style*="grid-template-columns: 300px 1fr"] {
+            grid-template-columns: 260px 1fr !important;
+            gap: 24px !important;
           }
-
-          .products-grid {
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
+          div[style*="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))"] {
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
+            gap: 20px !important;
           }
         }
 
         @media (max-width: 768px) {
-          .banner-container {
-            max-height: 250px;
+          div[style*="maxHeight: '420px'"] {
+            max-height: 250px !important;
           }
-
-          .home-container {
-            padding: 20px 15px 40px;
+          div[style*="grid-template-columns: 300px 1fr"],
+          div[style*="grid-template-columns: 260px 1fr"] {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
           }
-
-          .home-layout {
-            grid-template-columns: 1fr;
-            gap: 20px;
+          div[style*="fontSize: '2.2rem'"] {
+            font-size: 1.6rem !important;
           }
-
-          .products-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 15px;
+          div[style*="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))"],
+          div[style*="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))"] {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
+            gap: 16px !important;
           }
-
-          .products-header h1 {
-            font-size: 1.6rem;
-          }
-
-          .product-count-badge {
-            align-self: stretch;
-            text-align: center;
-          }
-
-          .products-grid {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-          }
-
-          .btn-load-more {
-            width: 100%;
-            padding: 12px 20px;
+          button[style*="padding: '16px 48px'"] {
+            width: 100% !important;
+            padding: 14px 20px !important;
           }
         }
 
         @media (max-width: 480px) {
-          .products-grid {
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
+          div[style*="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))"] {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+            gap: 12px !important;
           }
-
-          .products-header h1 {
-            font-size: 1.4rem;
+          div[style*="fontSize: '1.6rem'"] {
+            font-size: 1.4rem !important;
           }
         }
       `}</style>
